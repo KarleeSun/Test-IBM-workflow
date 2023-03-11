@@ -78,8 +78,8 @@ jobs:
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
           ibmcloud target -r eu-gb -g 2022-VetDB
           ibmcloud ce project select -n VetDB
-          echo "y" | ibmcloud ce app delete --name vetdb-frontend
-          echo "y" | ibmcloud ce app delete --name vetdb-backend
+          echo "y" | ibmcloud ce app delete --name frontend
+          echo "y" | ibmcloud ce app delete --name backend
       
       # Deploy frontend and backend to IBM Cloud Code Engine
       - name: Deploy frontend to IBM Cloud Code Engine
