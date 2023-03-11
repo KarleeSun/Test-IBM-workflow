@@ -18,6 +18,19 @@ jobs:
           curl -sL https://ibm.biz/idt-installer | bash
           ibmcloud config --check-version=false
         
+      # Log in to IBM Cloud
+      - name: Log in to IBM Cloud
+        run: |
+          ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          ibmcloud target -r uk-south -g 2022-vetdb
+
+       # Log in to IBM Cloud Container Registry
+      - name: Log in to IBM Cloud Container Registry
+        run: |
+          ibmcloud cr login
+          ibmcloud cr region-set uk-south
+
+        
       # Build frontend and backend Docker images
       - name: Build frontend Docker image
         run: |
@@ -29,11 +42,6 @@ jobs:
           docker build --platform linux/amd64 -t vetdb-backend:${{ github.sha }} ./backend
         shell: bash
 
-       # Log in to IBM Cloud Container Registry
-      - name: Log in to IBM Cloud Container Registry
-        run: |
-          ibmcloud cr login
-          ibmcloud cr region-set uk-south
       
       # Tag frontend and backend Docker images
       - name: Tag frontend Docker image
