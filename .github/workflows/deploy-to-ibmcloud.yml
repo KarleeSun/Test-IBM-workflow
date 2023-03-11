@@ -18,11 +18,11 @@ jobs:
           curl -sL https://ibm.biz/idt-installer | bash
           ibmcloud config --check-version=false
         
-      # # Log in to IBM Cloud
-      # - name: Log in to IBM Cloud
-      #   run: |
-      #     ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-      #     ibmcloud target -r eu-gb -g 2022-VetDB
+      # Install IBM Cloud Code Engine
+      - name: Install IBM Cloud Code Engine
+        run: |
+          ibmcloud plugin install code-engine
+
 
       # Authenticate with IBM Cloud CLI
       - name: Authenticate with IBM Cloud CLI
