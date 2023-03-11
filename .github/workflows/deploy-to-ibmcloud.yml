@@ -22,13 +22,13 @@ jobs:
       - name: Log in to IBM Cloud
         run: |
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          ibmcloud target -r uk-south -g 2022-vetdb
+          ibmcloud target -r eu-gb -g 2022-vetdb
 
        # Log in to IBM Cloud Container Registry
       - name: Log in to IBM Cloud Container Registry
         run: |
           ibmcloud cr login
-          ibmcloud cr region-set uk-south
+          ibmcloud cr region-set eu-gb
 
         
       # Build frontend and backend Docker images
@@ -69,13 +69,13 @@ jobs:
       - name: Deploy frontend to IBM Cloud Code Engine
         run: |
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          ibmcloud target -r uk-south -g 2022-vetdb
+          ibmcloud target -r eu-gb -g 2022-vetdb
           ibmcloud ce project select -n VetDB
           ibmcloud ce app create vetdb-frontend --image uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
           
       - name: Deploy backend to IBM Cloud Code Engine
         run: |
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          ibmcloud target -r uk-south -g 2022-vetdb
+          ibmcloud target -r eu-gb -g 2022-vetdb
           ibmcloud ce project select -n VetDB
           ibmcloud ce app create vetdb-backend --image uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
