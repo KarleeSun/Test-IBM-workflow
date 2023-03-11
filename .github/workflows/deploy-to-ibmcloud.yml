@@ -18,17 +18,24 @@ jobs:
           curl -sL https://ibm.biz/idt-installer | bash
           ibmcloud config --check-version=false
         
-      # Log in to IBM Cloud
-      - name: Log in to IBM Cloud
+      # # Log in to IBM Cloud
+      # - name: Log in to IBM Cloud
+      #   run: |
+      #     ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+      #     ibmcloud target -r eu-gb -g 2022-VetDB
+
+      # Authenticate with IBM Cloud CLI
+      - name: Authenticate with IBM Cloud CLI
         run: |
-          ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          ibmcloud target -r eu-gb -g 2022-VetDB
+          ibmcloud login --apikey "FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU" -r "eu-gb" -g "2022-VetDB"
+          ibmcloud cr region-set "eu-gb"
+          ibmcloud cr login
 
        # Log in to IBM Cloud Container Registry
       - name: Log in to IBM Cloud Container Registry
         run: |
           ibmcloud cr login
-          ibmcloud cr region-set eu-gb
+          ibmcloud cr region-set "eu-gb"
 
         
       # Build frontend and backend Docker images
