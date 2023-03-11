@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+       # Install IBM Cloud CLI
+      - name: Install IBM Cloud CLI
+        run: |
+          curl -sL https://ibm.biz/idt-installer | bash
+          ibmcloud config --check-version=false
+        
       # Build frontend and backend Docker images
       - name: Build frontend Docker image
         run: |
