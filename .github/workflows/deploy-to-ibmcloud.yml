@@ -75,6 +75,9 @@ jobs:
       # Delete existing application
       - name: Delete existing application
         run: |
+          ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          ibmcloud target -r eu-gb -g 2022-VetDB
+          ibmcloud ce project select -n VetDB
           echo "y" | ibmcloud ce app delete --name vetdb-frontend
           echo "y" | ibmcloud ce app delete --name vetdb-backend
       
