@@ -71,6 +71,12 @@ jobs:
         run: |
           docker push uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}
         shell: bash
+
+      # Delete existing application
+      - name: Delete existing application
+        run: |
+          echo "y" | ibmcloud ce app delete --name vetdb-frontend
+          echo "y" | ibmcloud ce app delete --name vetdb-backend
       
       # Deploy frontend and backend to IBM Cloud Code Engine
       - name: Deploy frontend to IBM Cloud Code Engine
@@ -78,11 +84,14 @@ jobs:
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
           ibmcloud target -r eu-gb -g 2022-VetDB
           ibmcloud ce project select -n VetDB
-          ibmcloud ce app create vetdb-frontend --image uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
+          ibmcloud ce app create --name vetdb-frontend --image uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }}  --min-scale 0 --max-scale 10 --cpu 4 --memory 16G --es 8G -registry-secret frontend-container-registry
           
       - name: Deploy backend to IBM Cloud Code Engine
         run: |
           ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
           ibmcloud target -r eu-gb -g 2022-VetDB
           ibmcloud ce project select -n VetDB
-          ibmcloud ce app create vetdb-backend --image uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
+          ibmcloud ce app create --name vetdb-backend --image uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}  --min-scale 0 --max-scale 10 --cpu 4 --memory 16G --es 8G -registry-secret frontend-container-registry
+
+
+
