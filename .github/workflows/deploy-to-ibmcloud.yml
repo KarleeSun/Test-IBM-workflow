@@ -22,6 +22,7 @@ jobs:
         run: |
           docker build --platform linux/amd64 -t vetdb-backend:${{ github.sha }} ./backend
         shell: bash
+      
       # Tag frontend and backend Docker images
       - name: Tag frontend Docker image
         run: |
@@ -46,33 +47,15 @@ jobs:
       
       # Deploy frontend and backend to IBM Cloud Code Engine
       - name: Deploy frontend to IBM Cloud Code Engine
-        uses: IBM/deploy-to-ibmcloud-ce@v0.2.0
-        with:
-          api_key: FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          project_name: VetDB
-          image: uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }}
-          memory: 32Gi
-          cpu: 4
-          ephemeral_storage: 8Gi
-          min_scale: 0
-          max_scale: 10
-          target_concurrency: ""
-          max_concurrency: 100
-          timeout: 300
-          registry_secret_name: frontend-container-registry
+        run: |
+          ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          ibmcloud target -r uk-south -g 2022-vetdb
+          ibmcloud ce project select -n VetDB
+          ibmcloud ce app create vetdb-frontend --image uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
           
       - name: Deploy backend to IBM Cloud Code Engine
-        uses: IBM/deploy-to-ibmcloud-ce@v0.2.0
-        with:
-          api_key: FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
-          project_name: VetDB
-          image: uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}
-          memory: 32Gi
-          cpu: 4
-          ephemeral_storage: 8Gi
-          min_scale: 0
-          max_scale: 10
-          target_concurrency: ""
-          max_concurrency: 100
-          timeout: 300
-          registry_secret_name: frontend-container-registry
+        run: |
+          ibmcloud login --apikey FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          ibmcloud target -r uk-south -g 2022-vetdb
+          ibmcloud ce project select -n VetDB
+          ibmcloud ce app create vetdb-backend --image uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }} --min-scale 0 --max-scale 10 --memory 32Gi --cpu 4 --ephemeral-storage 8Gi --registry-secret-name frontend-container-registry
