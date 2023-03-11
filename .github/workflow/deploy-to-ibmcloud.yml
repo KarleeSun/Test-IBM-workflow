@@ -1,0 +1,78 @@
+name: Deploy to IBM Cloud Code Engine
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      # Build frontend and backend Docker images
+      - name: Build frontend Docker image
+        run: |
+          docker build --platform linux/amd64 -t vetdb-frontend:${{ github.sha }} ./frontend
+        shell: bash
+        
+      - name: Build backend Docker image
+        run: |
+          docker build --platform linux/amd64 -t vetdb-backend:${{ github.sha }} ./backend
+        shell: bash
+      # Tag frontend and backend Docker images
+      - name: Tag frontend Docker image
+        run: |
+          docker tag vetdb-frontend:${{ github.sha }} uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }}
+        shell: bash
+        
+      - name: Tag backend Docker image
+        run: |
+          docker tag vetdb-backend:${{ github.sha }} uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}
+        shell: bash
+      
+      # Push frontend and backend Docker images to container registry
+      - name: Push frontend Docker image
+        run: |
+          docker push uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }}
+        shell: bash
+        
+      - name: Push backend Docker image
+        run: |
+          docker push uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}
+        shell: bash
+      
+      # Deploy frontend and backend to IBM Cloud Code Engine
+      - name: Deploy frontend to IBM Cloud Code Engine
+        uses: IBM/deploy-to-ibmcloud-ce@v0.2.0
+        with:
+          api_key: FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          project_name: VetDB
+          image: uk.icr.io/2022-vetdb/vetdb-frontend:${{ github.sha }}
+          memory: 32Gi
+          cpu: 4
+          ephemeral_storage: 8Gi
+          min_scale: 0
+          max_scale: 10
+          target_concurrency: ""
+          max_concurrency: 100
+          timeout: 300
+          registry_secret_name: frontend-container-registry
+          
+      - name: Deploy backend to IBM Cloud Code Engine
+        uses: IBM/deploy-to-ibmcloud-ce@v0.2.0
+        with:
+          api_key: FeVmuUG9frh7_S_yzXqQ-6lFrQSdhlfNndWeI5m2TYIU
+          project_name: VetDB
+          image: uk.icr.io/2022-vetdb/vetdb-backend:${{ github.sha }}
+          memory: 32Gi
+          cpu: 4
+          ephemeral_storage: 8Gi
+          min_scale: 0
+          max_scale: 10
+          target_concurrency: ""
+          max_concurrency: 100
+          timeout: 300
+          registry_secret_name: frontend-container-registry
