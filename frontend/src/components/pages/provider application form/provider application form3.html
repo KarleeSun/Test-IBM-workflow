@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Login Page </title>
+  <style>
+    Body {
+      font-family: Calibri, Helvetica, sans-serif;
+      background-color: #404040;
+      margin: auto;
+    }
+    h5{
+        font-size: 0.5rem;
+        color:black;
+        margin-left:7%;
+    }
+    h6{
+        margin-right:7%;
+      text-align: right;
+      font-size: 0.5rem;
+      color:red;
+    }
+    h7{
+        font-size: 0.5rem;
+        color:black;
+        margin-left:1%;
+    }
+    label {
+        font: 1rem 'Fira Sans', sans-serif;
+    }
+
+    input {
+        margin: 0.4rem;
+    }
+    input[id="practice1"] {
+        margin-left:14%;
+
+    }
+    input[id="practice2"] {
+        margin-left:40%;
+    }
+    input[type=text] {
+        width: 80%;
+        margin: 8px 0;
+        margin-left:7%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid #000000;
+        box-sizing: border-box;
+        text-color: blue;
+
+    }
+    button {
+      background-color: #1565C0;
+      width: 35%;
+      color: white;
+      padding: 15px;
+      margin: 10px 0px;
+        margin-left:7%;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.7;
+    }
+
+
+    .container {
+        width: auto;
+        height: auto;
+      padding: 50px;
+      margin-top:  10%;
+      margin-left: 35%;
+      margin-right: 35%;
+      margin-bottom: 0%;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+<form>
+  <div class="container">
+<center> <h3> What kind of placement is it?</h3> </center>
+<h5>Students may also filter placements by the type of animals being worked with</h5>
+<h6>Required fields highlighted by *</h6>
+      <h7>Animal(s) being worked with*</h7>
+      <h7>Is the practice a...?*</h7><br>
+
+      <input type="checkbox" id="Animal1" name="Animal1" value="Equine/Horse">
+      <label for="Animal1"> Equine/Horse</label>
+      <input type="checkbox" id="practice1" name="practice1" value="Vet">
+      <label for="practice1"> Vet</label><br>
+      <input type="checkbox" id="Animal2" name="Animal2" value="Pig">
+      <label for="Animal2"> Pig</label>
+      <input type="checkbox" id="practice2" name="practice2" value="Farm">
+      <label for="practice2"> Farm</label><br>
+      <input type="checkbox" id="Animal3" name="Animal3" value="Poultry">
+      <label for="Animal3"> Poultry</label><br>
+      <input type="checkbox" id="Animal4" name="Animal4" value="Small Animals">
+      <label for="Animal4"> Small Animals</label><br>
+      <input type="checkbox" id="Animal5" name="Animal5" value="wildlife">
+      <label for="Animal5"> Wildlife</label><br>
+      <input type="checkbox" id="Animal6" name="Animal6" value="Other">
+      <label for="Animal6"> Other</label><br>
+      <input type="text" placeholder="Other animals being handled" name="Other animals being handled" required><br>
+
+
+      <button type="BACK">BACK</button>
+      <button type="NEXT">NEXT</button>
+  </div>
+</form>
+</body>
+</html>

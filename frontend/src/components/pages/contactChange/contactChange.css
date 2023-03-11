@@ -1,0 +1,112 @@
+body{
+    background-color: #5aa6dc;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: c;
+    background-attachment: fixed;
+    font-family: "Roboto", "Helvetica Neue";
+    font-size: .95rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #292828;
+    text-align: left;
+}
+
+h1{
+font-size: 2.5rem;
+text-align: center;
+color: #00345D;
+}
+
+select{
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 2px solid #01579B;
+
+    box-sizing: border-box;
+}
+
+input[type=text]{
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 2px solid #01579B;
+
+    box-sizing: border-box;
+}
+
+
+
+button {
+    background-color: #00345D;
+    width: 100%;
+    color: white;
+    padding: 15px;
+    margin: 10px 0px;
+    border: none;
+    cursor: pointer;
+}
+
+.card-cover{
+    border: 1px solid #f1f2f4;
+    margin-top: 10rem;
+    margin-bottom: 1.5rem;
+    margin-right: 5%;
+    margin-left: 5%;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.15);
+    word-wrap: break-word;
+    padding: 5rem 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0;
+    min-width: 20rem;
+}
+
+.card-body{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-list{
+    flex-basis: 100%;
+    font-weight: 500;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+    padding: .6rem 1rem!important;
+    color: var(--primary-contrast-500,#fff);
+    background-color: var(--primary,#01579B);
+    border-color: var(--primary,#01579B);
+    min-width: 1rem !important;
+}
+
+.button-text{
+    text-align: center;
+}
+
+footer{
+    background-color: #01579B;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 2rem;
+    min-width: 10rem;
+}
+
+p{
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
