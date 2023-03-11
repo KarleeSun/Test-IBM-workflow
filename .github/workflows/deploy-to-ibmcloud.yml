@@ -22,6 +22,12 @@ jobs:
         run: |
           docker build --platform linux/amd64 -t vetdb-backend:${{ github.sha }} ./backend
         shell: bash
+
+       # Log in to IBM Cloud Container Registry
+      - name: Log in to IBM Cloud Container Registry
+        run: |
+          ibmcloud cr login
+          ibmcloud cr region-set uk-south
       
       # Tag frontend and backend Docker images
       - name: Tag frontend Docker image
