@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <Landing />,
     children: [
       {
-        path: "provider-forms/",
+        path: "provider-form/",
         children: [
           {
             path: "1",
